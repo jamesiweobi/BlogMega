@@ -1,15 +1,25 @@
 import './NavBar.css';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Context } from '../../Context/Context';
 
 export default function NavBar() {
-    const user = false;
+    const { user, dispatch } = useContext(Context);
+    const handleLogout = () => {
+        dispatch({ type: 'LOGOUT' });
+    };
+
     return (
         <div className='nav'>
             <div className='navLeft'>
                 {user ? (
                     <img
                         className='navImage'
-                        src='https://pokecharms.com/data/attachment-files/2015/10/236932_Bulbasaur_Picture.png'
+                        src={
+                            user
+                                ? user.displayPicture
+                                : 'https://i.pinimg.com/564x/04/5c/53/045c539f0a84487c87bc3c59b6647aac.jpg'
+                        }
                         alt='profilePicture'
                         srcset=''
                     />
@@ -54,10 +64,8 @@ export default function NavBar() {
                     ) : (
                         ''
                     )}
-                    <li className='navListItem'>
-                        <Link to='/logout' className='link'>
-                            {user && 'LOGOUT'}
-                        </Link>
+                    <li className='navListItem' onClick={handleLogout}>
+                        {user && 'LOGOUT'}
                     </li>
                 </ul>
             </div>

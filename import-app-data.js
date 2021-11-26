@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const fs = require('fs');
-const Course = require('./src/models/course.model');
+const Blog = require('./src/models/blog.model');
 const DB = process.env.URL.toString();
 mongoose
     .connect(DB, {
@@ -10,13 +10,13 @@ mongoose
     })
     .then(() => console.log('DB connection successful'));
 
-const courses = fs.readFileSync(`${__dirname}/course-sample.json`, 'utf8');
+const blogs = fs.readFileSync(`${__dirname}/blog-data.json`, 'utf8');
 
 // Import data
 const importData = async () => {
     try {
-        const data = JSON.parse(courses);
-        await Course.create(data);
+        const data = JSON.parse(blogs);
+        await Blog.create(data);
         console.log('Data successfully imported');
     } catch (error) {
         console.log(error);
@@ -25,7 +25,7 @@ const importData = async () => {
 };
 const deleteData = async () => {
     try {
-        await Course.deleteMany();
+        await Blog.deleteMany();
         console.log('Deleted data successfully');
     } catch (error) {
         console.log(error);

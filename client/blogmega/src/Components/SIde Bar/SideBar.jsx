@@ -1,12 +1,32 @@
 import './SideBar.css';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Context } from '../../Context/Context';
 
 export default function SideBar() {
+    const { user } = useContext(Context);
+    const [cats, setcats] = useState([]);
+    useEffect(() => {
+        const fetchcats = async () => {
+            const { data } = await axios.get('/api/v1/blogs/');
+            setcats(data.data);
+        };
+        fetchcats();
+    }, []);
+    const categories = cats.map((c) => c.category);
+    const catss = new Set(categories);
     return (
         <div className='sideBar'>
             <div className='sideBarItem'>
                 <span className='sideBarTitle'>ABOUT ME</span>
                 <img
-                    src='https://i.pinimg.com/564x/04/5c/53/045c539f0a84487c87bc3c59b6647aac.jpg'
+                    src={
+                        user
+                            ? user.displayPicture
+                            : 'https://i.pinimg.com/564x/04/5c/53/045c539f0a84487c87bc3c59b6647aac.jpg'
+                    }
                     alt='profile pciture'
                 />
                 <p>
@@ -17,12 +37,11 @@ export default function SideBar() {
             <div className='sideBarItem'>
                 <span className='sideBarTitle'>CATEGORIES</span>
                 <ul className='sideBarList'>
-                    <li className='sideBarListItem'>Life</li>
-                    <li className='sideBarListItem'>Music</li>
-                    <li className='sideBarListItem'>Style</li>
-                    <li className='sideBarListItem'>Sport</li>
-                    <li className='sideBarListItem'>Tech</li>
-                    <li className='sideBarListItem'>Cinema</li>
+                    {[...catss].map((c) => (
+                        <Link className='link' to={'/posts/?category=' + c}>
+                            <li className='sideBarListItem'>{c}</li>
+                        </Link>
+                    ))}
                 </ul>
             </div>
             <div className='sideBarItem'>

@@ -3,9 +3,9 @@ const authService = require('../services/auth.service');
 
 class AuthController {
     constructor() {}
-    async signUp(req, res, next) {
-        const result = await authService.signUp(req.body, next);
-        res.status(result.statusCode).json({
+    async signUp(req, res) {
+        const result = await authService.signUp(req.body);
+        return res.status(result.statusCode).json({
             status: result.status,
             user: result.user,
             message: result.message,
@@ -15,7 +15,7 @@ class AuthController {
 
     async login(req, res) {
         const result = await authService.login(req.body);
-        return res.status(result.statusCode).send({
+        return res.status(result.statusCode).json({
             status: result.status,
             message: result.message,
             user: result.user,
