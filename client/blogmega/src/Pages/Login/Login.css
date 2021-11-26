@@ -47,6 +47,12 @@ label {
     font-size: 18px;
 }
 
+.login-Button:disabled {
+    cursor: not-allowed;
+    background-color: gray;
+    color: black;
+}
+
 .registarButton {
     margin-top: 20px;
     cursor: pointer;

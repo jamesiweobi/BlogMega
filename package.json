@@ -4,6 +4,7 @@
         "bcryptjs": "^2.4.3",
         "concurrently": "^6.4.0",
         "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
         "express": "^4.17.1",
         "express-validator": "^6.12.2",
         "joi": "^17.4.2",
@@ -26,6 +27,5 @@
     "keywords": [],
     "author": "",
     "license": "ISC",
-    "description": "",
-    "proxy": "http://localhost:3001/api/v1"
+    "description": ""
 }
