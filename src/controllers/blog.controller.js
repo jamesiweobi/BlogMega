@@ -51,6 +51,7 @@ class BlogController {
     }
     async deleteBlog(req, res, next) {
         const id = req.params.blogId;
+        console.log(id);
         const deleleCo = await blogService.deleteBlog(id);
         return res.status(deleleCo.statusCode).json({
             status: deleleCo.status,

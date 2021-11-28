@@ -63,4 +63,5 @@ h1 {
 
 .likes {
     cursor: pointer;
+    margin-left: 10px;
 }

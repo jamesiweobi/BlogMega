@@ -21,7 +21,6 @@ export default function NavBar() {
                                 : 'https://i.pinimg.com/564x/04/5c/53/045c539f0a84487c87bc3c59b6647aac.jpg'
                         }
                         alt='profilePicture'
-                        srcset=''
                     />
                 ) : (
                     <ul className='navList'>

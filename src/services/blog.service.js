@@ -31,7 +31,7 @@ class BlogService {
 
     async findBlog(id) {
         try {
-            const blog = await this.Blog.findById(id).select('-__v').exec();
+            const blog = await this.Blog.findById(id).select('-__v');
             if (blog) {
                 return responseHandler(201, 'Success', 'Blog found.', blog);
             }
@@ -103,13 +103,14 @@ class BlogService {
 
     async deleteBlog(id) {
         try {
-            const deleted = await this.Blog.findOneAndDelete(id);
+            const blog = await this.Blog.findById(id);
+            if (!blog) return responseHandler(401, 'Failed', `Blog with this id: ${id} does not exist.`);
+            await this.Blog.findOneAndDelete(id);
             return responseHandler(200, 'Success', 'Succesfully deleted the blog');
         } catch (err) {
             if (err.name === 'CastError') {
                 return responseHandler(400, 'Failed', `${id} is not a valid blog ID.`);
             }
-            return responseHandler(501, 'Failed', err.message);
         }
     }
 }

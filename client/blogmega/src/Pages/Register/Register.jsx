@@ -5,16 +5,14 @@ import axios from 'axios';
 
 export default function Rogin() {
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         try {
-            const res = await axios.post('/api/v1/auth/signup', {
+            await axios.post('/api/v1/auth/signup', {
                 username,
-                email,
                 password,
             });
             window.location.replace('/login');

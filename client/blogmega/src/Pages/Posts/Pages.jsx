@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function Pages() {
-    const { search, location } = useLocation();
+    const { search } = useLocation();
     const [posts, setPosts] = useState([]);
     useEffect(() => {
         const fetchPosts = async () => {

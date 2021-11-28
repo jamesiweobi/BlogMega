@@ -26,7 +26,7 @@ export default function Write() {
                 formData.append('header', header);
                 formData.append('blogBody', blogBody);
                 formData.append('createdBy', user._id);
-                const { data } = await axios.post('/api/v1/blogs', formData);
+                await axios.post('/api/v1/blogs', formData);
                 setSuccess('Blog created successfully');
                 setDisabled(true);
             } catch (err) {
