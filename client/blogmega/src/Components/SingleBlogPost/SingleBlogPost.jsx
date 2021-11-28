@@ -1,13 +1,14 @@
 import './SingleBlogPost.css';
 import { useLocation } from 'react-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
+import { Context } from '../../Context/Context';
 
 export default function SingleBlogPost() {
+    const { user } = useContext(Context);
     const location = useLocation();
     const path = location.pathname.split('/');
     const [post, setPost] = useState({});
-    console.log(path);
     useEffect(() => {
         const getPost = async () => {
             const { data } = await axios.get('/api/v1/blogs/' + path[3]);
@@ -16,15 +17,17 @@ export default function SingleBlogPost() {
         getPost();
     }, [path]);
     return (
-        <div className='SinglePost'>
+        <div className='SinglePost' key={post._id}>
             <div className='singlePostWrapper'>
                 <img src={post.imageUrl} alt='' className='singlePostImg' />
                 <h1 className='singlePostTitle'>
                     {post.header}
-                    <div className='singlePostEdit'>
-                        <i className='singlePostEdit singlePostIcon icon fas fa-pen-fancy'></i>
-                        <i className='singlePostDelete singlePostIcon icon far fa-trash-alt'></i>
-                    </div>
+                    {post.createdBy === user._id && (
+                        <div className='singlePostEdit'>
+                            <i className='singlePostEdit singlePostIcon icon fas fa-pen-fancy'></i>
+                            <i className='singlePostDelete singlePostIcon icon far fa-trash-alt'></i>
+                        </div>
+                    )}
                 </h1>
                 <div className='singlePostInfo'>
                     <span className='singlePostAuthor'>

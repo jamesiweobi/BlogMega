@@ -49,6 +49,13 @@
     font-size: 18px;
     border-radius: 8px;
     border: none;
+    cursor: pointer;
+}
+
+.writeSubmit:disabled {
+    background-color: gray;
+    color: black;
+    cursor: not-allowed;
 }
 
 .writeImg {

@@ -18,13 +18,11 @@ const blogSchema = new Schema(
             type: String,
             required: [true, 'please enter the blog body.'],
         },
-        imageUrl: [
-            {
-                type: String,
-                required: [true, 'Please attach a blog image.'],
-                validate: [{ validator: isURL, msg: 'Please enter a valid email.' }],
-            },
-        ],
+        imageUrl: {
+            type: String,
+            required: [true, 'Please attach a blog image.'],
+            validate: [{ validator: isURL, msg: 'Please enter a valid email.' }],
+        },
         category: {
             type: String,
             default: 'Social',

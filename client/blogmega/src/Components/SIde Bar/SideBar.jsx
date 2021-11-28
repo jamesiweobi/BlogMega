@@ -15,7 +15,7 @@ export default function SideBar() {
         };
         fetchcats();
     }, []);
-    const categories = cats.map((c) => c.category);
+    const categories = cats.map((c) =>{ return {category: c.category, id:c._id}});
     const catss = new Set(categories);
     return (
         <div className='sideBar'>
@@ -38,8 +38,8 @@ export default function SideBar() {
                 <span className='sideBarTitle'>CATEGORIES</span>
                 <ul className='sideBarList'>
                     {[...catss].map((c) => (
-                        <Link className='link' to={'/posts/?category=' + c}>
-                            <li className='sideBarListItem'>{c}</li>
+                        <Link className='link' to={'/posts/?category=' + c.category}>
+                            <li key={c.id} className='sideBarListItem'>{c.category}</li>
                         </Link>
                     ))}
                 </ul>

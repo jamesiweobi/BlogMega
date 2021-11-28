@@ -1,10 +1,17 @@
 const blogService = require('../services/blog.service');
-const AppError = require('../utils/handle.errors');
-
+const uuid4 = require('uuid4');
+const { cloudinary } = require('../utils/handeFileUpload');
 class BlogController {
     constructor() {}
 
     async createBlog(req, res) {
+        const { url } = await cloudinary.uploader.upload(req.file.path, {
+            public_id: uuid4() + req.file.originalname,
+            width: 500,
+            height: 500,
+            crop: 'fill',
+        });
+        req.body.imageUrl = url;
         const result = await blogService.createBlog(req.body);
         res.status(result.statusCode).json({
             status: result.status,
@@ -50,5 +57,7 @@ class BlogController {
             message: deleleCo.message,
         });
     }
+
+    async handleFileUpload(req, res) {}
 }
 module.exports = new BlogController();

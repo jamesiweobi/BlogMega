@@ -1,6 +1,6 @@
 const { isUrl } = require('express-validator');
 const Blog = require('../models/blog.model');
-const { courseValidator } = require('../utils/Joi.validators.utils');
+const { courseValidator } = require('../utils/handeFileUpload');
 const responseHandler = require('../utils/handle.response');
 const AppError = require('../utils/handle.errors');
 
@@ -13,7 +13,6 @@ class BlogService {
         if (!body.header || !body.blogBody || !body.imageUrl || !body.createdBy) {
             return responseHandler(401, 'Failed', 'Please fill all required blog input.');
         }
-        // TODO: set the blog body here
         const newBlog = {
             header: body.header,
             blogBody: body.blogBody,

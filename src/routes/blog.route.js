@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const blogController = require('../controllers/blog.controller');
+const { upload } = require('../utils/handeFileUpload');
 
 router
-  .post('/', blogController.createBlog)
-  .get('/', blogController.findAllBlog)
-  .delete('/:blogId', blogController.deleteBlog);
+    .post('/', upload.single('image'), blogController.createBlog)
+    .get('/', blogController.findAllBlog)
+    .delete('/:blogId', blogController.deleteBlog);
 
-router
-  .get('/:blogId', blogController.findBlog)
-  .put('/:blogId', blogController.updateBlog);
+router.get('/:blogId', blogController.findBlog).put('/:blogId', blogController.updateBlog);
 
 module.exports = router;
