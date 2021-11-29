@@ -31,10 +31,7 @@ export default function SideBar() {
                     }
                     alt='profile pciture'
                 />
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat dolore ducimus veritatis
-                    tempora recusandae similique eveniet esse tenetur harum?
-                </p>
+                <p>{user && user.bio}</p>
             </div>
             <div className='sideBarItem'>
                 <span className='sideBarTitle'>CATEGORIES</span>

@@ -5,6 +5,8 @@
 .singlePostWrapper {
     padding: 30px;
     padding-left: 0px;
+    display: flex;
+    flex-direction: column;
 }
 
 .singlePostImg {
@@ -64,4 +66,34 @@ h1 {
 .likes {
     cursor: pointer;
     margin-left: 10px;
+}
+
+.singlePostEditHeader {
+    margin: 10px;
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    text-align: center;
+    color: gray;
+}
+
+.singlePostEditInput {
+    color: #666;
+    font: size 18px;
+    line-height: 25px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid gray;
+    font-size: 18px;
+    height: 400px;
+}
+
+.singlePostEditButton {
+    background-color: rgb(122, 122, 179);
+    color: white;
+    width: 100%;
+    border: none;
+    font-family: 'Lora', serif;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
 }

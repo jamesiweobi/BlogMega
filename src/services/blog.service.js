@@ -48,18 +48,18 @@ class BlogService {
         const category = req.query.category;
         try {
             if (userID) {
-                const blog = await this.Blog.find({ createdBy: userID }).select('-__v').exec();
+                const blog = await this.Blog.find({ createdBy: userID }).select('-__v');
                 if (blog) {
                     return responseHandler(200, 'Success', 'Successfully loaded all blog', blog, blog.length);
                 }
             }
             if (category) {
-                const blog = await this.Blog.find({ category }).select('-__v').exec();
+                const blog = await this.Blog.find({ category }).select('-__v');
                 if (blog) {
                     return responseHandler(200, 'Success', 'Successfully loaded all blog', blog, blog.length);
                 }
             }
-            const blog = await this.Blog.find({}).select('-__v').exec();
+            const blog = await this.Blog.find({}).select('-__v');
             if (blog) {
                 return responseHandler(200, 'Success', 'Successfully loaded all blog', blog, blog.length);
             }
@@ -93,6 +93,31 @@ class BlogService {
                 }
             ).select('-__v');
             return responseHandler(200, 'Success', 'Succesfully Updated the blog', blog, 0);
+        } catch (err) {
+            if (err.name === 'CastError') {
+                return responseHandler(400, 'Failed', `${id} is not a valid blog ID.`);
+            }
+            return responseHandler(501, 'Failed', err.message);
+        }
+    }
+
+    async likeUpdate(id) {
+        try {
+            const blogExists = await this.Blog.findById(id).select('-__v');
+            if (!blogExists) {
+                return responseHandler(400, 'Failed', `Blog with this "${id}" not found`);
+            }
+            blogExists.likes = blogExists.likes + 1;
+
+            const blog = await this.Blog.findByIdAndUpdate(
+                { _id: id },
+                { ...blogExists },
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            ).select('-__v');
+            return responseHandler(200, 'Success', 'Succesfully Updated the blog likes', blog, 0);
         } catch (err) {
             if (err.name === 'CastError') {
                 return responseHandler(400, 'Failed', `${id} is not a valid blog ID.`);

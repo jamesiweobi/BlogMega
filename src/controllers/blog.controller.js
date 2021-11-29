@@ -49,6 +49,17 @@ class BlogController {
             data: result.data,
         });
     }
+
+    async likeUpdate(req, res) {
+        const id = req.params.id;
+        const result = await blogService.likeUpdate(id);
+        return res.status(result.statusCode).json({
+            status: result.status,
+            message: result.message,
+            data: result.data,
+        });
+    }
+
     async deleteBlog(req, res, next) {
         const id = req.params.blogId;
         console.log(id);
@@ -59,6 +70,5 @@ class BlogController {
         });
     }
 
-    async handleFileUpload(req, res) {}
 }
 module.exports = new BlogController();

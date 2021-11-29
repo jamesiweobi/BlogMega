@@ -21,6 +21,9 @@ const userSchema = new Schema({
         default: 'https://wallpapercave.com/wp/wp8090325.jpg',
         validate: [{ validator: isURL, msg: 'Please enter a valid email' }],
     },
+    bio: {
+        type: String,
+    },
 });
 
 const Users = mongoose.model('Users', userSchema);

@@ -65,6 +65,31 @@ class AuthService {
         if (!user) return 'User not found!';
         return user;
     }
+
+    async updateUser(body) {
+        const id = body.id;
+        try {
+            const userExists = await this.Users.findById(id).select('-__v');
+            if (!userExists) {
+                return responseHandler(400, 'Failed', `User with this "${id}" not found`);
+            }
+
+            const updatedUser = await this.Users.findByIdAndUpdate(
+                { _id: id },
+                { ...body },
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            ).select('-__v');
+            return responseHandler(200, 'Success', 'Succesfully Updated the User',0, updatedUser);
+        } catch (err) {
+            if (err.name === 'CastError') {
+                return responseHandler(400, 'Failed', `${id} is not a valid User ID.`);
+            }
+            return responseHandler(501, 'Failed', err.message);
+        }
+    }
 }
 
 module.exports = new AuthService();

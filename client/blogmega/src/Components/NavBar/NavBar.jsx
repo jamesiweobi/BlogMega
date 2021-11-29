@@ -50,8 +50,8 @@ export default function NavBar() {
                         </Link>
                     </li>
                     <li className='navListItem'>
-                        <Link to='/about' className='link'>
-                            ABOUT
+                        <Link to='/profile' className='link'>
+                            PROFILE
                         </Link>
                     </li>
                     {user ? (
