@@ -71,7 +71,7 @@ export default function SingleBlogPost() {
                         ) : (
                             <h1 className='singlePostTitle'>
                                 {header}
-                                {post.createdBy?._id === user._id && (
+                                {post.createdBy?._id === user?._id && (
                                     <div className='singlePostEdit'>
                                         <i
                                             className='singlePostEdit singlePostIcon icon fas fa-pen-fancy'

@@ -1,10 +1,22 @@
 import './NavBar.css';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { Context } from '../../Context/Context';
+import axios from 'axios';
 
 export default function NavBar() {
     const { user, dispatch } = useContext(Context);
+
+    const [search, setSearch] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (search.length > 0) {
+            console.log(search.charAt(0).toUpperCase() + search.slice(1));
+            window.location.replace('/posts/?category=' + search.charAt(0).toUpperCase() + search.slice(1));
+        }
+    };
+
     const handleLogout = () => {
         dispatch({ type: 'LOGOUT' });
     };
@@ -69,13 +81,29 @@ export default function NavBar() {
                 </ul>
             </div>
             <div className='navRight'>
-                <i className='navIcon fab fa-facebook-f'></i>
-                <i className='navIcon fab fa-instagram'></i>
-                <i className='navIcon fab fa-linkedin-in'></i>
-                <i className='navIcon fab fa-twitter'></i>
-                <div className='navSearchBar navListItem'>
-                    <input className='searchInput' type='text' placeholder='Search' />
-                </div>
+                <a href='https://www.facebook.com/achemu.jackson' target='_blank' rel='noreferrer'>
+                    <i className='navIcon fab fa-facebook-f'></i>
+                </a>
+                <a href='https://www.instagram.com/jachemu/' target='_blank' rel='noreferrer'>
+                    <i className='navIcon fab fa-instagram'></i>
+                </a>
+                <a href='https://www.linkedin.com/in/afcamlogistics/' target='_blank' rel='noreferrer'>
+                    <i className='navIcon fab fa-linkedin-in'></i>
+                </a>
+                <a href='https://twitter.com/JAchemu' target='_blank' rel='noreferrer'>
+                    <i className='navIcon fab fa-twitter'></i>
+                </a>
+                <form className='navSearchBar navListItem' onSubmit={handleSubmit}>
+                    <input
+                        className='searchInput'
+                        type='text'
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder='Search posts by category'
+                    />
+                    <button className='search' type='submit'>
+                        <i class='iconSearch fas fa-search'></i>
+                    </button>
+                </form>
             </div>
         </div>
     );

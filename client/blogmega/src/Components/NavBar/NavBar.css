@@ -78,3 +78,13 @@
     background-color: white;
     color: black;
 }
+
+.search {
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.iconSearch {
+    color: gray;
+}

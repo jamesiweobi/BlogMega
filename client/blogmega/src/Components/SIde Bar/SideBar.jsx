@@ -16,9 +16,10 @@ export default function SideBar() {
         fetchcats();
     }, []);
     const categories = cats.map((c) => {
-        return { category: c.category, id: c._id };
+        return c.category;
     });
     const catss = new Set(categories);
+
     return (
         <div className='sideBar'>
             <div className='sideBarItem'>
@@ -36,9 +37,11 @@ export default function SideBar() {
             <div className='sideBarItem'>
                 <span className='sideBarTitle'>CATEGORIES</span>
                 <ul className='sideBarList'>
-                    {[...catss].map((c) => (
-                        <Link className='link' to={'/posts/?category=' + c.category} key={c.id}>
-                            <li className='sideBarListItem'>{c.category}</li>
+                    {[...catss].map((c, key) => (
+                        <Link className='link' to={'/posts/?category=' + c}>
+                            <li className='sideBarListItem' key={key}>
+                                {c}
+                            </li>
                         </Link>
                     ))}
                 </ul>
@@ -46,10 +49,18 @@ export default function SideBar() {
             <div className='sideBarItem'>
                 <span className='sideBarTitle'>FOLLOW US</span>
                 <div className='sideBarSocial'>
-                    <i className='sideBarIcon fab fa-facebook-f'></i>
-                    <i className='sideBarIcon fab fa-instagram'></i>
-                    <i className='sideBarIcon fab fa-linkedin-in'></i>
-                    <i className='sideBarIcon fab fa-twitter'></i>
+                    <a href='https://www.facebook.com/achemu.jackson' target='_blank' rel='noreferrer'>
+                        <i className='navIcon fab fa-facebook-f'></i>
+                    </a>
+                    <a href='https://www.instagram.com/jachemu/' target='_blank' rel='noreferrer'>
+                        <i className='navIcon fab fa-instagram'></i>
+                    </a>
+                    <a href='https://www.linkedin.com/in/afcamlogistics/' target='_blank' rel='noreferrer'>
+                        <i className='navIcon fab fa-linkedin-in'></i>
+                    </a>
+                    <a href='https://twitter.com/JAchemu' target='_blank' rel='noreferrer'>
+                        <i className='navIcon fab fa-twitter'></i>
+                    </a>
                 </div>
             </div>
         </div>
