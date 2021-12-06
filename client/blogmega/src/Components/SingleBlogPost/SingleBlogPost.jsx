@@ -47,7 +47,7 @@ export default function SingleBlogPost() {
 
     const handleDeleteClick = async () => {
         try {
-            await axios.delete('/api/v1/blogs/' + path);
+            const res = await axios.delete('/api/v1/blogs/' + path);
             window.location.replace('/');
         } catch (err) {
             setError(err.response.data.message);
@@ -56,7 +56,7 @@ export default function SingleBlogPost() {
     return (
         <>
             {post && (
-                <div className='SinglePost' key={post._id}>
+                <div className='SinglePost'>
                     {error && <span className='errorMessage'>{error}</span>}
                     <div className='singlePostWrapper'>
                         <img src={post.imageUrl} alt='' className='singlePostImg' />

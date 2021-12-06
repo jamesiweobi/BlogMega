@@ -130,7 +130,7 @@ class BlogService {
         try {
             const blog = await this.Blog.findById(id);
             if (!blog) return responseHandler(401, 'Failed', `Blog with this id: ${id} does not exist.`);
-            await this.Blog.findOneAndDelete(id);
+            await blog.delete();
             return responseHandler(200, 'Success', 'Succesfully deleted the blog');
         } catch (err) {
             if (err.name === 'CastError') {

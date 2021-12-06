@@ -1,8 +1,7 @@
 import './NavBar.css';
 import { Link } from 'react-router-dom';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Context } from '../../Context/Context';
-import axios from 'axios';
 
 export default function NavBar() {
     const { user, dispatch } = useContext(Context);
